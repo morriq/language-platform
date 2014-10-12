@@ -20,15 +20,16 @@ angular.module('languagePlatformApp')
 
     $scope.form = {}
     $scope.form.table = []
-    $scope.form.update = (index) =>
+    $scope.form.update = (index, afterDelete = false) =>
         row = $scope.form.table[index]
         revertChangesByRequest = true
 
         unless row.id
             row.created = true
-            return
+        else
+            row.modifed = true
 
-        row.modifed = true
+        return if afterDelete
 
         # can add new row?
         return if index isnt $scope.form.table.length - 1
@@ -47,12 +48,14 @@ angular.module('languagePlatformApp')
             confirmButtonText: 'Yes, delete it!'
             , ->
                 $scope.$apply ->
+                    revertChangesByRequest = true
+
                     if $scope.form.table.filter((elem) -> elem.deleted is undefined).length is 1
                         cleaned = getCleanedRow()
                         cleaned.id = $scope.form.table[0].id
                         $scope.form.table[0] = cleaned
 
-                        return $scope.form.update 0
+                        return $scope.form.update 0, true
 
                     $scope.form.table[index].deleted = true
 
@@ -85,6 +88,3 @@ angular.module('languagePlatformApp')
 
     # todo localStorage do leveli.
     # todo jesli na froncie jest mniej niz na backendzie to odsylam na front wpis z flaga isNew (mozna pokolorowac front)
-
-    # A) piszę, piszę. w trakcie A leci request. B) W trakcie requesta dalej piszę. Kończy się request. To co napisałem w B jest anulwoane
-    # updejt serwa
