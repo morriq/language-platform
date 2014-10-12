@@ -1,7 +1,8 @@
 <?php
-    include '/FluentPDO/FluentPDO.php';
+    include __DIR__.'/FluentPDO/FluentPDO.php';
 
     $pdo = new PDO("mysql:dbname=language-platform;charset=utf8", "root");
+    //     $pdo = new PDO("mysql:dbname=basior_language;charset=utf8", "basior_language", "48n5P0Wu");
     $fpdo = new FluentPDO($pdo);
 
     function refresh_table($fpdo)

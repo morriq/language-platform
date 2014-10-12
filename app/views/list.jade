@@ -1,14 +1,20 @@
-header.header
-    a.btn.btn-default(href='#add', target='_self') Add
-    a.btn.btn-default Test
+header.header.beam
+    .btn.btn-primary(ng-click='scroll.top()') Top of list
+    .btn.btn-primary(ng-click='scroll.bottom()') End of list
+    .btn.btn-danger(disabled='disabled') Exam
 
-table#add.table.table-hover.table-striped
+table#table-list.table-list.table.table-hover.table-striped
     tr.one-row(ng-repeat='(index, elem) in form.table', ng-hide='elem.deleted')
         td
-            input.word.form-control.input-lg(placeholder='word', autofocus='true', ng-model='elem.word', ng-change='form.update(index)', ng-focus='form.setFocus(index)', ng-blur='form.lostFocus(index)')
+            input.word.form-control.input-lg(placeholder='word', autofocus='true', ng-model='elem.word', ng-change='form.update(index)')
         td
-            input.native.form-control.input-lg(placeholder='native', ng-model='elem.native', ng-change='form.update(index)', ng-focus='form.setFocus(index); form.add(index)', ng-blur='form.lostFocus(index)')
+            input.native.form-control.input-lg(placeholder='native', ng-model='elem.native', ng-change='form.update(index)')
         td
-            textarea.form-control.input-lg(placeholder='description', ng-model='elem.description', ng-change='form.update(index)', ng-focus='form.setFocus(index)', ng-blur='form.lostFocus(index)')
+            textarea.form-control.input-lg(placeholder='description', ng-model='elem.description', ng-change='form.update(index)')
         td
             .btn.btn-warning.btn-lg(ng-click='form.delete(index)') x
+
+footer.beam.footer.text-right
+    .btn.btn-primary.btn-sm(ng-click='scroll.top()') Top of list
+    .btn.btn-primary.btn-sm(ng-click='scroll.bottom()') End of list
+    .btn.btn-danger.btn-sm(disabled='disabled') Exam
